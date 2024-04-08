@@ -15,28 +15,28 @@ jobs:
         config:
         - {
             name: "Ubuntu Latest GCC Release",
-            os: ubuntu-20.04,
+            os: self-hosted,
             build_type: "Release", cc: "gcc", cxx: "g++",
             build_gen: "Unix Makefiles",
             cmake_extra_opts: "-Dbuild_search=YES -Dbuild_app=YES -Dbuild_parse=YES"
           }
         - {
             name: "Ubuntu Latest GCC Debug",
-            os: ubuntu-20.04,
+            os: self-hosted,
             build_type: "Debug", cc: "gcc", cxx: "g++",
             build_gen: "Unix Makefiles",
             cmake_extra_opts: "-Dbuild_search=YES -Dbuild_app=YES -Dbuild_parse=YES"
           }
         - {
             name: "Ubuntu Latest Clang Release",
-            os: ubuntu-20.04,
+            os: self-hosted,
             build_type: "Release", cc: "clang", cxx: "clang++",
             build_gen: "Unix Makefiles",
             cmake_extra_opts: "-Duse_libclang=YES -Dstatic_libclang=YES -Duse_libc++=NO"
           }
         - {
             name: "Ubuntu Latest Clang Debug",
-            os: ubuntu-20.04,
+            os: self-hosted,
             build_type: "Debug", cc: "clang", cxx: "clang++",
             build_gen: "Unix Makefiles",
             cmake_extra_opts: "-Duse_libclang=YES -Dstatic_libclang=YES -Duse_libc++=NO"
@@ -84,7 +84,7 @@ jobs:
         sudo apt upgrade
         sudo apt update
         sudo apt-get install texlive texlive-latex-recommended texlive-extra-utils texlive-latex-extra texlive-font-utils
-      if: startsWith(matrix.config.os,'ubuntu-')
+      if: startsWith(matrix.config.os,'self-')
 
     - name: Install LaTeX (MacOS)
       run: |
@@ -112,13 +112,13 @@ jobs:
         ls -al /etc/alternatives/clang++
         which clang++
         clang++ -v
-      if: matrix.config.os == 'ubuntu-20.04'
+      if: matrix.config.os == 'self-hosted'
 
     - name: Install libxapian (Ubuntu 20.04)
       run: |
         sudo apt update
         sudo apt install libxapian-dev
-      if: matrix.config.os == 'ubuntu-20.04'
+      if: matrix.config.os == 'self-hosted'
 
     - name: Install LaTeX (Windows)
       uses: teatimeguest/setup-texlive-action@v3
@@ -135,7 +135,7 @@ jobs:
       run: |
         sudo apt update
         sudo apt-get install ghostscript
-      if: startsWith(matrix.config.os,'ubuntu-')
+      if: startsWith(matrix.config.os,'self-')
 
     - name: Install Ghostscript (Windows)
       run:
@@ -155,7 +155,7 @@ jobs:
       run: |
          sudo apt-get update
          sudo apt-get install libxml2-utils
-      if: startsWith(matrix.config.os,'ubuntu-')
+      if: startsWith(matrix.config.os,'self-')
 
     - name: Install xmllint (MacOS)
       run: |
@@ -182,7 +182,7 @@ jobs:
       run: |
         sudo apt update
         sudo apt-get install graphviz
-      if: startsWith(matrix.config.os,'ubuntu-')
+      if: startsWith(matrix.config.os,'self-')
 
     - name: Install Graphviz (MacOS)
       run: |
@@ -387,5 +387,5 @@ jobs:
          external_repository: doxygen/doxygen-docs
          publish_dir: build/doxygen_docs/html
          force_orphan: true
-      if: ${{ github.event_name == 'push' && matrix.config.name == 'Ubuntu Latest GCC Release' }}
+      if: ${{ github.event_name == 'push' && matrix.config.name == ' Latest GCC Release' }}
 
